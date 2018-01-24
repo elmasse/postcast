@@ -112,7 +112,7 @@ export default class Postcast extends Component {
       <Container {...props} >
         { loading && <Loading>Loading</Loading> }
         { !loading && loaded && <Player markdown={markdown} /> }
-        { error && <Error><h2>Something went wrong</h2>{error}</Error>}
+        { error && <Error><h2>Something went wrong</h2>{error}</Error> }
       </Container>
     )
   }
