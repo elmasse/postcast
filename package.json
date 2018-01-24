@@ -11,8 +11,6 @@
     "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -o dist/umd/postcast.js",
     "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -o dist/umd/postcast.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "release": "taskr release",
-    "prepublish": "npm run release",
     "lint": "standard 'src/**/*.js' "
   },
   "files": [
