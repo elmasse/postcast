@@ -18,7 +18,7 @@ export default class Code extends Component {
   }
 }
 
-const Pre = styled.pre`
+const Pre = styled('pre')`
   box-shadow: 0 2px 4px rgba(0,0,0,.15);
   text-align: left;
   min-width: 450px;

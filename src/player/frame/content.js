@@ -22,7 +22,7 @@ const table = css`
     object-fit: contain;
   }
 `
-const Container = styled.div`
+const Container = styled('div')`
   ${scrollable}
   ${table}
   padding: 30px;

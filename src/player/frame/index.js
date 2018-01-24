@@ -41,7 +41,7 @@ export default class Frame extends Component {
   }
 }
 
-const Framed = styled.div`
+const Framed = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;

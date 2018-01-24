@@ -16,7 +16,7 @@ export default class Language extends Component {
   }
 }
 
-const Button = styled.div`
+const Button = styled('div')`
   display: flex;
   align-items: center;
   font-size: ${({size}) => size * 0.4}px;;

@@ -116,7 +116,7 @@ export default class Player extends Component {
   }
 }
 
-const Viewport = styled.div`
+const Viewport = styled('div')`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -125,7 +125,7 @@ const Viewport = styled.div`
   flex: 1; 
 `
 
-const Toolbar = styled.div`
+const Toolbar = styled('div')`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -135,7 +135,7 @@ const Toolbar = styled.div`
   transition: all .3s ease-out;
 `
 
-const Controls = styled.div`
+const Controls = styled('div')`
   display: flex;
   padding: 2px 5px;
 `

@@ -36,7 +36,7 @@ export default class Timeline extends Component {
   }
 }
 
-const InputRange = styled.input`
+const InputRange = styled('input')`
   flex: 1;
   margin: 0 10px;
   width: auto;

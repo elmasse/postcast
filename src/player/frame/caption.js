@@ -17,7 +17,7 @@ const fadeIn = keyframes`
   to { opacity: 1; }
 `
 
-const Captioned = styled.div`
+const Captioned = styled('div')`
   position: absolute;
   bottom: 35px;
   background: rgba(0,0,0,.3);
