@@ -4,7 +4,6 @@ import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
 import commonjs from 'rollup-plugin-commonjs'
 import json from 'rollup-plugin-json'
-// import css from 'modular-css-rollup'
 
 const env = process.env.NODE_ENV
 const config = {
@@ -27,16 +26,12 @@ const config = {
     json({
       include: 'node_modules/**'      
     })
-
-    // css({
-    //   css: 'node_modules/highlight.js/styles/atom-one-light.css'
-    // })
   ],
   external: [
     'react',
     'react-dom',
     'prop-types'
-  ],  
+  ]
 }
 
 if (env === 'es' || env === 'cjs') {
@@ -46,13 +41,6 @@ if (env === 'es' || env === 'cjs') {
     format: env
   }
   config.external = ['symbol-observable']
-  // config.plugins.push(
-  //   babel({
-  //     plugins: [
-  //       'external-helpers'
-  //     ]
-  //   })
-  // )
 }
 
 if (env === 'development' || env === 'production') {

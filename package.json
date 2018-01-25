@@ -2,15 +2,12 @@
   "name": "postcast",
   "version": "1.0.4",
   "description": "",
-  "main": "index.js",
-  "module": "dist/es/postcast.js",
+  "main": "index.js",  
   "scripts": {
     "test": "jest",
-    "build:commonjs": "cross-env NODE_ENV=cjs rollup -c -o dist/postcast.js",
-    "build:es": "cross-env BABEL_ENV=es NODE_ENV=es rollup -c -o dist/es/postcast.js",
-    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -o dist/umd/postcast.js",
-    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -o dist/umd/postcast.min.js",
-    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build": "taskr",
+    "release": "taskr release",
+    "prepublish": "npm run release",
     "lint": "standard 'src/**/*.js' "
   },
   "files": [
@@ -46,7 +43,7 @@
     "@taskr/esnext": "1.1.0",
     "@taskr/watch": "1.1.0",
     "babel-core": "^6.24.1",
-    "babel-eslint": "8.0.2",
+    "babel-eslint": "^7.2.3",
     "babel-jest": "22.1.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
