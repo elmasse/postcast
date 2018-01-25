@@ -1,9 +1,17 @@
 {
   "presets": [
     "react",
-    "es2015-rollup"
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ]
+    
   ],
   "plugins": [
+    "external-helpers",
+    "transform-async-functions",
     "transform-object-rest-spread",
     "babel-plugin-transform-class-properties"
   ]
