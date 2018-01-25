@@ -4,6 +4,7 @@ import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
 import commonjs from 'rollup-plugin-commonjs'
 import json from 'rollup-plugin-json'
+import async from 'rollup-plugin-async'
 
 export async function cjs(task, opts) {
   await task
@@ -13,6 +14,7 @@ export async function cjs(task, opts) {
         babel({
           exclude: 'node_modules/**'
         }),
+        async(),
         commonjs({
           include: 'node_modules/**',
           namedExports: {
