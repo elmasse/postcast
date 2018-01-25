@@ -11,6 +11,7 @@
   ],
   "plugins": [
     "external-helpers",
+    "transform-runtime",
     "transform-async-functions",
     "transform-object-rest-spread",
     "babel-plugin-transform-class-properties"

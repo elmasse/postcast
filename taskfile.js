@@ -11,7 +11,8 @@ export async function cjs(task, opts) {
     .rollup({
       plugins: [
         babel({
-          exclude: 'node_modules/**'
+          exclude: 'node_modules/**',
+          runtimeHelpers: true 
         }),
         commonjs({
           include: 'node_modules/**',
