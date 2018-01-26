@@ -76,21 +76,21 @@ export default class Postcast extends Component {
     }
   }
 
+  async fetchFileText (file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        resolve(e.target.result)
+      }
+      reader.readAsText(file)
+    })
+  }
+
   async loadFile (file) {
     this.setState({ loading: true, error: null })
 
-    async function fetchFileText () {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          resolve(e.target.result)
-        }
-        reader.readAsText(file)
-      })
-    }
-
     if (file) {
-      const text = await fetchFileText(file)
+      const text = await this.fetchFileText(file)
       this.setState({
         loaded: true,
         loading: false,
@@ -106,7 +106,7 @@ export default class Postcast extends Component {
   }
 
   render () {
-    const { src, ...props } = this.props
+    const { src, file, ...props } = this.props
     const { loaded, loading, markdown, error } = this.state
     return (
       <Container {...props} >
