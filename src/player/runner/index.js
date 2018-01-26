@@ -1,5 +1,3 @@
-/* global btoa */
-
 import React, { Component } from 'react'
 
 import { isStringNode, isCodeNode, isContentNode } from '../frame'
@@ -27,6 +25,8 @@ const processTextToSpeech = (frame) => {
   return walk(frame).trim()
 }
 
+const runnerKey = (frame) => frame.props.children.reduce((prev, curr) => `${prev}-${curr.key}`, 'runner')
+
 export default class Runner extends Component {
   state = {
     text: processTextToSpeech(this.props.frame),
@@ -48,10 +48,10 @@ export default class Runner extends Component {
 
   render () {
     const { text, duration } = this.state
-    const { play, pause, onEnd, metadata } = this.props
+    const { play, pause, onEnd, metadata, frame } = this.props
     const Runner = text ? Synth : Timer
-    const key = btoa(text).substr(10)
     const lang = metadata ? metadata.lang : ''
+    const key = runnerKey(frame)
 
     return (
       <Runner key={key} text={text} duration={duration} onEnd={onEnd} play={play} pause={pause} lang={lang} />
