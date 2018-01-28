@@ -1,7 +1,10 @@
 {
   "name": "postcast",
   "version": "1.0.10",
-  "description": "",
+  "description": "A react component to create a postcast using markdown",
+  "repository": "https://github.com/postcast/postcast",
+  "bugs": "https://github.com/postcast/postcast/issues",
+  "homepage": "https://postcast-app.now.sh",  
   "main": "index.js",
   "module": "dist/es/postcast.js",
   "scripts": {
