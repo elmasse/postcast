@@ -4,7 +4,7 @@
   "description": "A react component to create a postcast using markdown",
   "repository": "https://github.com/postcast/postcast",
   "bugs": "https://github.com/postcast/postcast/issues",
-  "homepage": "https://postcast-app.now.sh",  
+  "homepage": "https://postcast-app.now.sh",
   "main": "index.js",
   "module": "dist/es/postcast.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "build": "taskr",
     "release": "taskr release",
     "prepublish": "npm run release",
-    "lint": "standard 'src/**/*.js' "
+    "lint": "standard 'src/**/*.js' ",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "files": [
     "dist",
@@ -42,6 +43,7 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
+    "@storybook/react": "^3.3.11",
     "@taskr/babel": "1.1.0",
     "@taskr/clear": "1.1.0",
     "@taskr/esnext": "1.1.0",
