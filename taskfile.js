@@ -74,7 +74,7 @@ export async function build(task) {
 }
 
 export async function lint(task) {
-  await task.source('{src, test}/**/*.js').standard()
+  await task.source('src/**/*.js').standard()
 }
 
 export default async function (task) {
