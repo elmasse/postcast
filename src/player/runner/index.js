@@ -4,6 +4,8 @@ import { isStringNode, isCodeNode, isContentNode } from '../frame'
 import Synth from './synth'
 import Timer from './timer'
 
+const NoOp = () => null
+
 const processTextToSpeech = (frame) => {
   const sanitize = textNode => {
     return textNode
@@ -48,8 +50,8 @@ export default class Runner extends Component {
 
   render () {
     const { text, duration } = this.state
-    const { play, pause, onEnd, metadata, frame } = this.props
-    const Runner = text ? Synth : Timer
+    const { play, pause, onEnd, metadata, frame } = this.props    
+    const Runner = text ? (('speechSynthesis' in window) ? Synth : NoOp) : Timer
     const lang = metadata ? metadata.lang : ''
     const key = runnerKey(frame)
 
