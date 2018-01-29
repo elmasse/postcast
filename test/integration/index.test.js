@@ -26,7 +26,7 @@ describe('Postcast', () => {
     expect(wrapper.state('loaded')).toBe(true)
     expect(wrapper.state('error')).toBeFalsy()
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot()
 
   })
 
@@ -43,7 +43,7 @@ describe('Postcast', () => {
 
     expect(wrapper.state('loaded')).toBe(false)
     expect(wrapper.state('error')).not.toBeFalsy()
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot()
 
   })
 })
