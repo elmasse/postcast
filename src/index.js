@@ -15,7 +15,14 @@ export default class Postcast extends Component {
   }
 
   async componentDidMount () {
-    const { src, file } = this.props
+    const { src, file, children } = this.props
+    if (children) {
+      this.setState({
+        loaded: true,
+        markdown: children()
+      })
+    }
+
     if (src) {
       await this.fetchPost(src)
     }
@@ -26,8 +33,15 @@ export default class Postcast extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    const { src, file } = this.props
-    const { src: prevSrc, file: prevFile } = prevProps
+    const { src, file, children } = this.props
+    const { src: prevSrc, file: prevFile, children: prevChildren } = prevProps
+    if (children && prevChildren !== children) {
+      this.setState({
+        loaded: true,
+        markdown: children()
+      })
+    }
+
     if (src && prevSrc !== src) {
       await this.fetchPost(src)
     }
@@ -106,7 +120,7 @@ export default class Postcast extends Component {
   }
 
   render () {
-    const { src, file, ...props } = this.props
+    const { src, file, children, ...props } = this.props
     const { loaded, loading, markdown, error } = this.state
     return (
       <Container {...props} >

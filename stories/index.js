@@ -11,3 +11,12 @@ storiesOf('Postcast', module)
   .add('with src', () => (
     <Postcast src="https://raw.githubusercontent.com/postcast/postcast/master/README.md"></Postcast>
   ))
+  .add('with markdown as children', () => (
+    <Postcast>
+      {() => `
+# This is a Title
+
+And this is a paragraph.
+      `}
+    </Postcast>
+  ))
