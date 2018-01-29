@@ -51,7 +51,6 @@ describe('Postcast', () => {
       headers: {
         'content-type': 'text/html'
       }
-
     })
 
     const wrapper = mount(<Postcast src={'/not-markdown'} />)
