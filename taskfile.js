@@ -70,11 +70,11 @@ export async function compile(task) {
 }
 
 export async function build(task) {
-  await task.serial(['lint',  'compile'])
+  await task.serial(['lint', 'compile'])
 }
 
 export async function lint(task) {
-  await task.source('src/**/*.js').standard();
+  await task.source('{src, test}/**/*.js').standard()
 }
 
 export default async function (task) {
