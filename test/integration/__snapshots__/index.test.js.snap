@@ -233,3 +233,26 @@ exports[`Postcast load src with error 1`] = `
   </Styled(div)>
 </Postcast>
 `;
+
+exports[`Postcast load src with non markdown endpoint 1`] = `
+<Postcast
+  src="/not-markdown"
+>
+  <Styled(div)>
+    <div
+      className="css-2iy19l"
+    >
+      <Styled(div)>
+        <div
+          className="css-72j8j7"
+        >
+          <h2>
+            Something went wrong
+          </h2>
+          /not-markdown does not look like a markdown file!
+        </div>
+      </Styled(div)>
+    </div>
+  </Styled(div)>
+</Postcast>
+`;

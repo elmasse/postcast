@@ -43,4 +43,25 @@ describe('Postcast', () => {
     expect(wrapper.state('error')).not.toBeFalsy()
     expect(wrapper).toMatchSnapshot()
   })
+
+  test('load src with non markdown endpoint', async () => {
+    fetchMock.get('/not-markdown', {
+      body: '<html></html>',
+      status: 200,
+      headers: {
+        'content-type': 'text/html'
+      }
+      
+    })
+
+    const wrapper = mount(<Postcast src={'/not-markdown'} />)
+
+    await wrapper.instance().componentDidMount()
+
+    wrapper.update()
+
+    expect(wrapper.state('loaded')).toBe(false)
+    expect(wrapper.state('error')).not.toBeFalsy()
+    expect(wrapper).toMatchSnapshot()
+  })  
 })
