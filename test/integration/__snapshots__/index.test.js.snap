@@ -29,6 +29,14 @@ exports[`Postcast load src 1`] = `
                       This is a title
                     </h1>
                   </Content>
+                  <Caption
+                    hidden={true}
+                    textToSpeech="This is a title"
+                  >
+                    <h1>
+                      This is a title
+                    </h1>
+                  </Caption>
                 </Frame>
               }
               metadata={null}
@@ -38,7 +46,7 @@ exports[`Postcast load src 1`] = `
             >
               <NoOp
                 duration={2000}
-                key="runner-h-2"
+                key="runner-h-3-h-5"
                 lang=""
                 onEnd={[Function]}
                 pause={true}
@@ -54,7 +62,7 @@ exports[`Postcast load src 1`] = `
                   className="css-8z9imq"
                 >
                   <Content
-                    key="h-2"
+                    key="h-3"
                   >
                     <Styled(div)
                       css="css-5j5vrg"
@@ -63,13 +71,18 @@ exports[`Postcast load src 1`] = `
                         className="css-1uahr9q"
                       >
                         <h1
-                          key="h-3"
+                          key="h-4"
                         >
                           This is a title
                         </h1>
                       </div>
                     </Styled(div)>
                   </Content>
+                  <Caption
+                    hidden={true}
+                    key="h-5"
+                    textToSpeech="This is a title"
+                  />
                 </div>
               </Styled(div)>
             </Frame>
@@ -169,6 +182,14 @@ exports[`Postcast load src 1`] = `
                             This is a title
                           </h1>
                         </Content>
+                        <Caption
+                          hidden={true}
+                          textToSpeech="This is a title"
+                        >
+                          <h1>
+                            This is a title
+                          </h1>
+                        </Caption>
                       </Frame>,
                       <Frame>
                         <Content>
@@ -176,7 +197,9 @@ exports[`Postcast load src 1`] = `
                             This is a title
                           </h1>
                         </Content>
-                        <Caption>
+                        <Caption
+                          textToSpeech=" And this a paragraph"
+                        >
                           <p>
                              And this a paragraph
                           </p>
@@ -284,6 +307,14 @@ And Paragraph"
                       Title
                     </h1>
                   </Content>
+                  <Caption
+                    hidden={true}
+                    textToSpeech="Title"
+                  >
+                    <h1>
+                      Title
+                    </h1>
+                  </Caption>
                 </Frame>
               }
               metadata={null}
@@ -293,7 +324,7 @@ And Paragraph"
             >
               <NoOp
                 duration={2000}
-                key="runner-h-2"
+                key="runner-h-3-h-5"
                 lang=""
                 onEnd={[Function]}
                 pause={true}
@@ -309,7 +340,7 @@ And Paragraph"
                   className="css-8z9imq"
                 >
                   <Content
-                    key="h-2"
+                    key="h-3"
                   >
                     <Styled(div)
                       css="css-5j5vrg"
@@ -318,13 +349,18 @@ And Paragraph"
                         className="css-1uahr9q"
                       >
                         <h1
-                          key="h-3"
+                          key="h-4"
                         >
                           Title
                         </h1>
                       </div>
                     </Styled(div)>
                   </Content>
+                  <Caption
+                    hidden={true}
+                    key="h-5"
+                    textToSpeech="Title"
+                  />
                 </div>
               </Styled(div)>
             </Frame>
@@ -424,6 +460,14 @@ And Paragraph"
                             Title
                           </h1>
                         </Content>
+                        <Caption
+                          hidden={true}
+                          textToSpeech="Title"
+                        >
+                          <h1>
+                            Title
+                          </h1>
+                        </Caption>
                       </Frame>,
                       <Frame>
                         <Content>
@@ -431,7 +475,9 @@ And Paragraph"
                             Title
                           </h1>
                         </Content>
-                        <Caption>
+                        <Caption
+                          textToSpeech="And Paragraph"
+                        >
                           <p>
                             And Paragraph
                           </p>

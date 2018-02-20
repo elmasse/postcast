@@ -5,9 +5,9 @@ export default class Caption extends Component {
   static displayName = 'Caption'
 
   render () {
-    const { children } = this.props
+    const { children, hidden = false } = this.props
     return (
-      <Captioned>{children}</Captioned>
+      !hidden && <Captioned>{children}</Captioned>
     )
   }
 }

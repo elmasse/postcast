@@ -9,8 +9,9 @@ import raw from 'rehype-raw'
 import u from 'unist-builder'
 import h from 'hastscript'
 import fm from 'frontmatter'
+import visit from 'unist-util-visit'
 
-import Frame from './frame'
+import Frame, { isContentNode, isFrameNode } from './frame'
 import Caption from './frame/caption'
 import Content from './frame/content'
 import Code from './frame/code'
@@ -26,6 +27,21 @@ const onlyImages = (node) => {
   return true
 }
 
+const createCaption = (props, children) => {
+  if (props instanceof Array) {
+    children = props
+    props = {}
+  }
+  let textToSpeech = ''
+  const [ node ] = children
+
+  visit(node, 'text', ({ value }) => {
+    textToSpeech += value
+  })
+
+  return h('postcast-caption', { ...props, textToSpeech }, children)
+}
+
 const createItems = ({ data }) => (tree) => {
   const { children } = tree
   const items = []
@@ -39,22 +55,26 @@ const createItems = ({ data }) => (tree) => {
   for (const node of children) {
     const { tagName } = node
     switch (tagName) {
+      case 'img':
+      case 'table':
+        content = h('postcast-content', [node])
+        items.push(content)
+        break
       case 'h1':
       case 'h2':
       case 'h3':
       case 'h4':
-      case 'img':
       case 'blockquote':
-      case 'table':
+        caption = createCaption({ hidden: true }, [node])
         content = h('postcast-content', [node])
-        items.push(content)
+        items.push(h('postcast-frame', [content, caption]))
         break
       case 'p':
         if (onlyImages(node)) {
           content = h('postcast-content', [node])
           items.push(content)
         } else {
-          caption = h('postcast-caption', [node])
+          caption = createCaption([node])
           items.push(caption)
         }
         break
@@ -69,8 +89,9 @@ const createItems = ({ data }) => (tree) => {
       case 'ol':
         const uls = node.children.filter((c) => !['\n'].includes(c.value))
         for (const child of uls) {
+          caption = createCaption({ hidden: true }, [child])
           content = h('postcast-content', [h('ul', [child])])
-          items.push(content)
+          items.push(h('postcast-frame', [content, caption]))
         }
         break
       default:
@@ -89,14 +110,16 @@ const cleanNodes = () => tree => {
 
 const createFrames = (items) => {
   let content, caption
+
   return items.map((item, idx, all) => {
-    if (item.type.displayName === 'Content') {
+    if (isFrameNode(item)) {
+      [content, caption] = item.props.children
+    } else if (isContentNode(item)) {
       content = item
       caption = undefined
     } else {
       caption = item
     }
-
     const children = [content]
     if (caption) {
       children.push(caption)
@@ -122,6 +145,7 @@ const process = markdown => {
     .use(reactRenderer, {
       createElement: React.createElement,
       components: {
+        'postcast-frame': Frame,
         'postcast-content': Content,
         'postcast-caption': Caption,
         'postcast-code': Code

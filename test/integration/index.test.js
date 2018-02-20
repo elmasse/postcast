@@ -63,6 +63,7 @@ describe('Postcast', () => {
     expect(wrapper.state('error')).not.toBeFalsy()
     expect(wrapper).toMatchSnapshot()
   })
+
   test('markdown as children', async () => {
 
     const wrapper = mount(<Postcast >{()=>`# Title\nAnd Paragraph`}</Postcast>)
@@ -75,5 +76,5 @@ describe('Postcast', () => {
     expect(wrapper.state('error')).toBeFalsy()
 
     expect(wrapper).toMatchSnapshot()
-  })  
+  })
 })

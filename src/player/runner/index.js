@@ -1,30 +1,25 @@
 import React, { Component } from 'react'
 
-import { isStringNode, isCodeNode, isContentNode } from '../frame'
+import { isCaptionNode } from '../frame'
 import Synth from './synth'
 import Timer from './timer'
 
 const NoOp = () => null
 
 const processTextToSpeech = (frame) => {
-  const sanitize = textNode => {
-    return textNode
+  const sanitize = text => {
+    return text
       .replace(/[·]/gi, '') // hmmmm....
       .replace(/http(s):\/\//, '')
   }
 
-  const walk = (c) => {
-    const { children = [] } = c.props
-    return children
-      .filter((child, _, all) => {
-        return (isStringNode(child) || !(isContentNode(child) && all.length > 1))
-      })
-      .map((child) => isStringNode(child) ? (sanitize(child)) : (!isCodeNode(child)) ? walk(child) : '')
-      .reduce((prev, curr) => prev.concat(curr), [])
-      .join(' ')
-  }
-
-  return walk(frame).trim()
+  return frame.props.children
+    .filter(isCaptionNode)
+    .filter(e => e.props.textToSpeech)
+    .map(e => sanitize(e.props.textToSpeech))
+    .reduce((prev, curr) => prev.concat(curr), [])
+    .join(' ')
+    .trim()
 }
 
 const runnerKey = (frame) => frame.props.children.reduce((prev, curr) => `${prev}-${curr.key}`, 'runner')
