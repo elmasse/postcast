@@ -29,15 +29,15 @@ const onlyImages = (node) => {
 
 const replacePhonemes = (phonemes, text) => {
   if (!phonemes) return text
-  const re = new RegExp(Object.keys(phonemes).join("|"),"gi");
+  const re = new RegExp(Object.keys(phonemes).join('|'), 'gi')
 
-  return text.replace(re, (matched) =>  phonemes[matched.toLowerCase()]);
+  return text.replace(re, (matched) => phonemes[matched.toLowerCase()])
 }
 
 const captioner = ({ data }) => ({props, children}) => {
   let textToSpeech = ''
   const [ node ] = children
-  
+
   const { phonemes } = data || {}
 
   visit(node, 'text', ({ value }) => {
@@ -57,7 +57,7 @@ const createItems = ({ data }) => (tree) => {
 
   if (data && data.title) {
     const node = h('h1', [data.title])
-    caption = createCaption({props:{ hidden: true }, children:[node]})
+    caption = createCaption({props: { hidden: true }, children: [node]})
     content = h('postcast-content', [node])
     items.push(h('postcast-frame', [content, caption]))
   }
@@ -75,7 +75,7 @@ const createItems = ({ data }) => (tree) => {
       case 'h3':
       case 'h4':
       case 'blockquote':
-        caption = createCaption({props:{ hidden: true }, children:[node]})
+        caption = createCaption({props: { hidden: true }, children: [node]})
         content = h('postcast-content', [node])
         items.push(h('postcast-frame', [content, caption]))
         break
