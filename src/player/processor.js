@@ -27,29 +27,39 @@ const onlyImages = (node) => {
   return true
 }
 
-const createCaption = (props, children) => {
-  if (props instanceof Array) {
-    children = props
-    props = {}
-  }
+const replacePhonemes = (phonemes, text) => {
+  if (!phonemes) return text
+  const re = new RegExp(Object.keys(phonemes).join("|"),"gi");
+
+  return text.replace(re, (matched) =>  phonemes[matched.toLowerCase()]);
+}
+
+const captioner = ({ data }) => ({props, children}) => {
   let textToSpeech = ''
   const [ node ] = children
+  
+  const { phonemes } = data || {}
 
   visit(node, 'text', ({ value }) => {
     textToSpeech += value
   })
 
-  return h('postcast-caption', { ...props, textToSpeech }, children)
+  const result = replacePhonemes(phonemes, textToSpeech)
+console.log(result)
+  return h('postcast-caption', { ...props, textToSpeech: result }, children)
 }
 
 const createItems = ({ data }) => (tree) => {
+  const createCaption = captioner({ data })
   const { children } = tree
   const items = []
   let content, caption
 
   if (data && data.title) {
-    content = h('postcast-content', [h('h1', [data.title])])
-    items.push(content)
+    const node = h('h1', [data.title])
+    caption = createCaption({props:{ hidden: true }, children:[node]})
+    content = h('postcast-content', [node])
+    items.push(h('postcast-frame', [content, caption]))
   }
 
   for (const node of children) {
@@ -65,7 +75,7 @@ const createItems = ({ data }) => (tree) => {
       case 'h3':
       case 'h4':
       case 'blockquote':
-        caption = createCaption({ hidden: true }, [node])
+        caption = createCaption({props:{ hidden: true }, children:[node]})
         content = h('postcast-content', [node])
         items.push(h('postcast-frame', [content, caption]))
         break
@@ -74,7 +84,7 @@ const createItems = ({ data }) => (tree) => {
           content = h('postcast-content', [node])
           items.push(content)
         } else {
-          caption = createCaption([node])
+          caption = createCaption({children: [node]})
           items.push(caption)
         }
         break
@@ -89,7 +99,7 @@ const createItems = ({ data }) => (tree) => {
       case 'ol':
         const uls = node.children.filter((c) => !['\n'].includes(c.value))
         for (const child of uls) {
-          caption = createCaption({ hidden: true }, [child])
+          caption = createCaption({props: { hidden: true }, children: [child]})
           content = h('postcast-content', [h('ul', [child])])
           items.push(h('postcast-frame', [content, caption]))
         }
