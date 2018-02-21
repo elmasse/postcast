@@ -45,7 +45,7 @@ const captioner = ({ data }) => ({props, children}) => {
   })
 
   const result = replacePhonemes(phonemes, textToSpeech)
-console.log(result)
+
   return h('postcast-caption', { ...props, textToSpeech: result }, children)
 }
 
