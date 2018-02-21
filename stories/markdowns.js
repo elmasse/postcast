@@ -43,13 +43,13 @@ export const withConfig =
 `---
 lang: es-AR
 phonemes:
-   yaml: /yáml/
-   framework: /fréimwork/
-   slides: /sláids/
+   yaml: /iámel/
+   framework: /fréim uorc/
+   slides: /es láidz/
 ---
 
 # Presentaciones en Español
 
 A veces contienen palabras en inglés. Como por ejemplo "framework que nos permite crear slides". 
-O pueden ser siglas que se leen en inglés como YAML
+O pueden ser siglas que se leen en inglés como YAML.
 `
