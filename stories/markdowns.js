@@ -5,11 +5,14 @@ And this is a paragraph.
 `
 
 export const longParagraph = 
-`# This is a Title
+`---
+title: Title
+---
 
-And this is a paragraph. A short one. This will be not modified.
+A *paragraph* with \`Code in text\` and links like [example.com](/somehwhere) and more text. And this is a longer text that should exceed the limits for a paragraph. Believe me, Chrome is a piece of crap on Linux machines. But hey, don't get me wrong, Linux is good.
 
-But this one, should be splitted into 4 paragraphs since it contains more than 200 characters. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+Anoter Paragraph.  
+With Line breaks.
 `
 
 export const withTitleInYAML =

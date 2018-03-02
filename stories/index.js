@@ -12,6 +12,9 @@ storiesOf('Postcast', module)
   .add('with src', () => (
     <Postcast src="https://raw.githubusercontent.com/postcast/postcast/master/README.md"></Postcast>
   ))
+  .add('with src: Redux README', () => (
+    <Postcast src="/redux.md"/>
+  ))
   .add('with markdown as children', () => (
     <Postcast>
       {() => md.simple}
