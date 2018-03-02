@@ -9,7 +9,9 @@ import raw from 'rehype-raw'
 import u from 'unist-builder'
 import h from 'hastscript'
 import fm from 'frontmatter'
+
 import visit from 'unist-util-visit'
+import { sentences } from 'sbd'
 
 import Frame, { isContentNode, isFrameNode } from './frame'
 import Caption from './frame/caption'
@@ -34,19 +36,20 @@ const replacePhonemes = (phonemes, text) => {
   return text.replace(re, (matched) => phonemes[matched.toLowerCase()])
 }
 
-const captioner = ({ data }) => ({props, children}) => {
-  let textToSpeech = ''
+const captioner = ({ data }) => ({ props, children }) => {
   const [ node ] = children
-
   const { phonemes } = data || {}
+  let textToSpeech = ''
 
   visit(node, 'text', ({ value }) => {
     textToSpeech += value
   })
 
-  const result = replacePhonemes(phonemes, textToSpeech)
-
-  return h('postcast-caption', { ...props, textToSpeech: result }, children)
+  return h('postcast-caption', {
+    ...props,
+    textToSpeech: replacePhonemes(phonemes, textToSpeech) },
+    [node]
+  )
 }
 
 const createItems = ({ data }) => (tree) => {
@@ -109,13 +112,7 @@ const createItems = ({ data }) => (tree) => {
         break
     }
   }
-
   return u('root', items)
-}
-
-const cleanNodes = () => tree => {
-  tree.children = tree.children.filter(c => !!c.tagName)
-  return tree
 }
 
 const createFrames = (items) => {
@@ -147,10 +144,74 @@ const process = markdown => {
   const { data, content } = fm(markdown)
   const processor = unified()
     .use(remarkParse)
+    .use(() => tree => {
+      const replace = []
+      const explode = (textNode) => {
+        return sentences(textNode.value, { preserve_whitespace: true })
+          .map(v => ({ ...textNode, value: v }))
+      }
+
+      tree.children.forEach(
+        p => {
+          if (p.type !== 'paragraph') return
+          const { children } = p
+          const split = []
+          let sentence = ''
+          let from = 0
+
+          // explode text children
+          for (const _child of children) {
+            if (_child.type === 'text') {
+              children.splice(children.indexOf(_child), 1, ...explode(_child))
+            }
+          }
+
+          // split sentences
+          for (const child of children) {
+            const index = children.indexOf(child)
+            let splitChildren
+
+            if (child.type === 'break') {
+              splitChildren = children.slice(from, index)
+              if (splitChildren.length) {
+                split.push({ ...p, children: splitChildren })
+              }
+              from = index + 1 // skip break
+            }
+
+            if (child.type === 'text') {
+              sentence += child.value
+              const result = sentences(sentence)
+
+              if (result.length > 1) {
+                splitChildren = children.slice(from, index)
+                if (splitChildren.length) {
+                  split.push({ ...p, children: splitChildren })
+                }
+                from = index
+                sentence = child.value
+              }
+
+              if (index === children.length - 1) { // reached last element
+                splitChildren = children.slice(from)
+                if (splitChildren.length) {
+                  split.push({ ...p, children: splitChildren })
+                }
+              }
+            }
+          } // for
+          replace.push([p, split])
+        }
+      ) // forEach
+
+      replace.forEach(([p, split]) => {
+        tree.children.splice(tree.children.indexOf(p), 1, ...split)
+      })
+    })
     .use(emoji)
     .use(remark2rehype, { allowDangerousHTML: true })
+    .use(() => tree => { tree.children = tree.children.filter(c => !!c.tagName) })
     .use(raw)
-    .use(cleanNodes)
     .use(createItems, { data })
     .use(reactRenderer, {
       createElement: React.createElement,
