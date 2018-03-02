@@ -12,7 +12,7 @@ const baseRollupPlugins = [
     namedExports: {
       'react': ['Children', 'Component', 'PropTypes', 'createElement'],
       'react-dom': ['render', 'findDOMNode']
-    }      
+    }
   }),
   resolve({
     jsnext: true,
@@ -33,8 +33,10 @@ const externals = [
   'remark-emoji',
   'remark-parse',
   'remark-rehype',
+  'sbd',
   'unified',
-  'unist-builder'
+  'unist-builder',
+  'unist-visit',
 ]
 
 export async function cjs(task, opts) {
