@@ -17,7 +17,7 @@ import createItems from './create-items'
 import createFrames from './create-frames'
 import splitParagraph from './split-paragraph'
 
-export default markdown => {
+export default (markdown, { phonemes }) => {
   const { data, content } = fm(markdown)
   const processor = unified()
     .use(remarkParse)
@@ -26,7 +26,7 @@ export default markdown => {
     .use(remark2rehype, { allowDangerousHTML: true })
     .use(() => tree => { tree.children = tree.children.filter(c => !!c.tagName) })
     .use(raw)
-    .use(createItems, { data })
+    .use(createItems, { data: { phonemes, ...data } })
     .use(reactRenderer, {
       createElement: React.createElement,
       components: {

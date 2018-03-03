@@ -120,12 +120,12 @@ export default class Postcast extends Component {
   }
 
   render () {
-    const { src, file, children, ...props } = this.props
+    const { src, file, children, lang, phonemes, ...props } = this.props
     const { loaded, loading, markdown, error } = this.state
     return (
       <Container {...props} >
         { loading && <Loading>Loading</Loading> }
-        { !loading && loaded && <Player markdown={markdown} /> }
+        { !loading && loaded && <Player markdown={markdown} lang={lang} phonemes={phonemes} /> }
         { error && <Error><h2>Something went wrong</h2>{error}</Error> }
       </Container>
     )

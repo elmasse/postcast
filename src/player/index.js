@@ -12,12 +12,12 @@ import Language from './buttons/language'
 export default class Player extends Component {
   constructor (props) {
     super(props)
-    const { markdown } = props
-    const { data, content } = process(markdown)
+    const { markdown, lang, phonemes } = props
+    const { data, content } = process(markdown, { phonemes })
     this.state = {
       active: 0,
       playing: false,
-      metadata: data,
+      metadata: { lang, phonemes, ...data },
       frames: content,
       captions: true,
       mouseOver: false
@@ -25,13 +25,14 @@ export default class Player extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { markdown } = this.props
+    const { markdown, lang, phonemes } = this.props
+
     if (markdown !== nextProps.markdown) {
-      const { data, content } = process(nextProps.markdown)
+      const { data, content } = process(nextProps.markdown, { phonemes })
       this.setState({
         active: 0,
         playing: false,
-        metadata: data,
+        metadata: { phonemes, lang, ...data },
         frames: content,
         captions: true,
         mouseOver: false
