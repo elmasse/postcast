@@ -31,17 +31,28 @@ storiesOf('Postcast', module)
     </Postcast>
   ))
   .add('with language', () => (
-    <Postcast>
-      {() => md.withLanguage}
+    <Postcast lang="es-AR">
+      {() => md.withTextInSpanish}
     </Postcast>    
   ))
-  .add('with phonemes', () => (
-    <Postcast>
-      {() => md.withPhonemes}
+  .add('with language by YAML', () => (
+    <Postcast lang="es-AR">
+      {() => md.withLanguage}
     </Postcast>    
+  ))  
+  .add('with phonemes by param', () => (
+    <Postcast phonemes={{yaml: `/yæməl/`}}>
+      {() => md.withPhonemes}
+    </Postcast>
+  ))
+  .add('with phonemes by yaml', () => (
+    <Postcast>
+      {() => md.withPhonemesInYAML}
+    </Postcast>
   ))
   .add('with multiple config', () => (
     <Postcast>
       {() => md.withConfig}
     </Postcast>
   ))
+  

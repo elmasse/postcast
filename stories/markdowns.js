@@ -23,6 +23,11 @@ title: This is a Title from YAML
 And this is a paragraph.
 `
 
+export const withTextInSpanish =
+`# Esto es un título
+
+Y esto es un párrafo que está en Español.
+`
 export const withLanguage =
 `---
 lang: es-AR
@@ -33,6 +38,15 @@ Y esto es un párrafo que está en Español.
 `
 
 export const withPhonemes = 
+`---
+title: This is a Title from YAML
+---
+
+And this is a paragraph that contains again, the word yaml.
+`
+
+
+export const withPhonemesInYAML = 
 `---
 title: This is a Title from YAML
 phonemes:
