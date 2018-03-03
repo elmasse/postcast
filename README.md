@@ -12,7 +12,9 @@ npm install postcast react react-dom
 
 ## Usage
 
-`Postcast` requires a `src` that should be a url pointing to a markdown file.
+### With URL
+
+You can specify a url pointing to a markdown file using the `src` config:
 
 ```js
 import React from 'react'
@@ -20,6 +22,19 @@ import React from 'react'
 export default () => <Postcast src="/guides/getting-started.md" />
 
 ```
+
+### With inline markdown
+
+Markdown can be passed using a children function:
+
+```js
+<Postcast lang="es-AR">
+    {() => `#Hola Mundo!`}
+</Postcast>
+
+```
+
+
 
 ### Higlighting code
 
@@ -29,7 +44,6 @@ export default () => <Postcast src="/guides/getting-started.md" />
 import React from 'react'
 // eslint-disable-next-line 
 import css from 'highlight.js/styles/atom-one-light.css'
-
 
 export default () => <Postcast src="/guides/getting-started.md" />
 
