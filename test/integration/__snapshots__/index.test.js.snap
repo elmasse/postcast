@@ -39,7 +39,12 @@ exports[`Postcast load src 1`] = `
                   </Caption>
                 </Frame>
               }
-              metadata={null}
+              metadata={
+                Object {
+                  "lang": undefined,
+                  "phonemes": undefined,
+                }
+              }
               onEnd={[Function]}
               pause={true}
               play={false}
@@ -47,7 +52,6 @@ exports[`Postcast load src 1`] = `
               <NoOp
                 duration={2000}
                 key="runner-h-3-h-5"
-                lang=""
                 onEnd={[Function]}
                 pause={true}
                 play={false}
@@ -317,7 +321,12 @@ And Paragraph"
                   </Caption>
                 </Frame>
               }
-              metadata={null}
+              metadata={
+                Object {
+                  "lang": undefined,
+                  "phonemes": undefined,
+                }
+              }
               onEnd={[Function]}
               pause={true}
               play={false}
@@ -325,7 +334,6 @@ And Paragraph"
               <NoOp
                 duration={2000}
                 key="runner-h-3-h-5"
-                lang=""
                 onEnd={[Function]}
                 pause={true}
                 play={false}
