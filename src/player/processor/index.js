@@ -16,32 +16,13 @@ import Code from '../frame/code'
 import createItems from './create-items'
 import createFrames from './create-frames'
 import splitParagraph from './split-paragraph'
+import appendCaptionParagraphs from './append-caption-paragraphs';
 
 export default (markdown, { phonemes }) => {
   const { data, content } = fm(markdown)
   const processor = unified()
     .use(remarkParse)
-    .use(() => tree => {
-      const extended = []
-      tree.children.forEach(e => {
-        const { type } = e
-        extended.push(e)
-        switch (type) {
-          case 'heading':
-          case 'blockquote':
-            extended.push({ ...e, type: 'paragraph' })
-            break
-          case 'list':
-            e.children.forEach(li => {
-              li.children.forEach(lip => {
-                extended.push({ ...lip, type: 'paragraph' })
-              })
-            })
-            break
-        }
-      })
-      tree.children = extended
-    })
+    .use(appendCaptionParagraphs)
     .use(splitParagraph)
     .use(emoji)
     .use(remark2rehype, { allowDangerousHTML: true })

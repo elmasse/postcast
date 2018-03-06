@@ -55,6 +55,8 @@ export default () => tree => {
   replace.forEach(([p, split]) => {
     tree.children.splice(tree.children.indexOf(p), 1, ...split)
   })
+
+  console.log(tree)
 }
 
 const explode = (textNode) => {
