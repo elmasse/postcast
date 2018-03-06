@@ -12,9 +12,6 @@ storiesOf('Postcast', module)
   .add('with src', () => (
     <Postcast src="https://raw.githubusercontent.com/postcast/postcast/master/README.md"></Postcast>
   ))
-  .add('with src: Redux README', () => (
-    <Postcast src="/redux.md"/>
-  ))
   .add('with markdown as children', () => (
     <Postcast>
       {() => md.simple}
@@ -45,7 +42,7 @@ storiesOf('Postcast', module)
       {() => md.withPhonemes}
     </Postcast>
   ))
-  .add('with phonemes by yaml', () => (
+  .add('with phonemes by YAML', () => (
     <Postcast>
       {() => md.withPhonemesInYAML}
     </Postcast>
@@ -55,4 +52,9 @@ storiesOf('Postcast', module)
       {() => md.withConfig}
     </Postcast>
   ))
-  
+  .add('with src: React README', () => (
+    <Postcast src="/react.md"/>
+  ))
+  .add('with src: Redux README', () => (
+    <Postcast src="/redux.md"/>
+  ))
