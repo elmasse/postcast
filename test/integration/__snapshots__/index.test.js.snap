@@ -29,14 +29,6 @@ exports[`Postcast load src 1`] = `
                       This is a title
                     </h1>
                   </Content>
-                  <Caption
-                    hidden={true}
-                    textToSpeech="This is a title"
-                  >
-                    <h1>
-                      This is a title
-                    </h1>
-                  </Caption>
                 </Frame>
               }
               metadata={
@@ -49,13 +41,13 @@ exports[`Postcast load src 1`] = `
               pause={true}
               play={false}
             >
-              <NoOp
+              <Timer
                 duration={2000}
-                key="runner-h-3-h-5"
+                key="runner-h-2"
                 onEnd={[Function]}
                 pause={true}
                 play={false}
-                text="This is a title"
+                text=""
               />
             </Runner>
             <Frame
@@ -66,7 +58,7 @@ exports[`Postcast load src 1`] = `
                   className="css-8z9imq"
                 >
                   <Content
-                    key="h-3"
+                    key="h-2"
                   >
                     <Styled(div)
                       css="css-5j5vrg"
@@ -75,18 +67,13 @@ exports[`Postcast load src 1`] = `
                         className="css-1uahr9q"
                       >
                         <h1
-                          key="h-4"
+                          key="h-3"
                         >
                           This is a title
                         </h1>
                       </div>
                     </Styled(div)>
                   </Content>
-                  <Caption
-                    hidden={true}
-                    key="h-5"
-                    textToSpeech="This is a title"
-                  />
                 </div>
               </Styled(div)>
             </Frame>
@@ -186,13 +173,19 @@ exports[`Postcast load src 1`] = `
                             This is a title
                           </h1>
                         </Content>
-                        <Caption
-                          hidden={true}
-                          textToSpeech="This is a title"
-                        >
+                      </Frame>,
+                      <Frame>
+                        <Content>
                           <h1>
                             This is a title
                           </h1>
+                        </Content>
+                        <Caption
+                          textToSpeech="This is a title"
+                        >
+                          <p>
+                            This is a title
+                          </p>
                         </Caption>
                       </Frame>,
                       <Frame>
@@ -214,14 +207,14 @@ exports[`Postcast load src 1`] = `
                   onChangeFrame={[Function]}
                 >
                   <Styled(input)
-                    max={1}
+                    max={2}
                     onChange={[Function]}
                     type="range"
                     value={0}
                   >
                     <input
                       className="css-dig042"
-                      max={1}
+                      max={2}
                       onChange={[Function]}
                       type="range"
                       value={0}
@@ -311,14 +304,6 @@ And Paragraph"
                       Title
                     </h1>
                   </Content>
-                  <Caption
-                    hidden={true}
-                    textToSpeech="Title"
-                  >
-                    <h1>
-                      Title
-                    </h1>
-                  </Caption>
                 </Frame>
               }
               metadata={
@@ -331,13 +316,13 @@ And Paragraph"
               pause={true}
               play={false}
             >
-              <NoOp
+              <Timer
                 duration={2000}
-                key="runner-h-3-h-5"
+                key="runner-h-2"
                 onEnd={[Function]}
                 pause={true}
                 play={false}
-                text="Title"
+                text=""
               />
             </Runner>
             <Frame
@@ -348,7 +333,7 @@ And Paragraph"
                   className="css-8z9imq"
                 >
                   <Content
-                    key="h-3"
+                    key="h-2"
                   >
                     <Styled(div)
                       css="css-5j5vrg"
@@ -357,18 +342,13 @@ And Paragraph"
                         className="css-1uahr9q"
                       >
                         <h1
-                          key="h-4"
+                          key="h-3"
                         >
                           Title
                         </h1>
                       </div>
                     </Styled(div)>
                   </Content>
-                  <Caption
-                    hidden={true}
-                    key="h-5"
-                    textToSpeech="Title"
-                  />
                 </div>
               </Styled(div)>
             </Frame>
@@ -468,13 +448,19 @@ And Paragraph"
                             Title
                           </h1>
                         </Content>
-                        <Caption
-                          hidden={true}
-                          textToSpeech="Title"
-                        >
+                      </Frame>,
+                      <Frame>
+                        <Content>
                           <h1>
                             Title
                           </h1>
+                        </Content>
+                        <Caption
+                          textToSpeech="Title"
+                        >
+                          <p>
+                            Title
+                          </p>
                         </Caption>
                       </Frame>,
                       <Frame>
@@ -496,14 +482,14 @@ And Paragraph"
                   onChangeFrame={[Function]}
                 >
                   <Styled(input)
-                    max={1}
+                    max={2}
                     onChange={[Function]}
                     type="range"
                     value={0}
                   >
                     <input
                       className="css-dig042"
-                      max={1}
+                      max={2}
                       onChange={[Function]}
                       type="range"
                       value={0}
