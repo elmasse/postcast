@@ -12,13 +12,19 @@ export default () => tree => {
       let sentence = ''
       let from = 0
       const pushToSplit = pushTo(split)
+      const exploded = []
 
       // explode text children
       for (const _child of children) {
         if (_child.type === 'text') {
-          children.splice(children.indexOf(_child), 1, ...explode(_child))
+          exploded.push([_child, explode(_child)])
         }
       }
+      console.log(exploded)
+
+      exploded.forEach(([child, explode]) => {
+        children.splice(children.indexOf(child), 1, ...explode)
+      })
 
       // split sentences
       for (const child of children) {
@@ -38,24 +44,35 @@ export default () => tree => {
             from = index
             sentence = child.value
           }
+        }
 
-          if (index === children.length - 1) { // reached last element
-            pushToSplit(p, from)
-          }
+        if (index === children.length - 1) { // reached last element
+          pushToSplit(p, from)
         }
       } // for
       replace.push([p, split])
     }
   ) // forEach
-
   replace.forEach(([p, split]) => {
     tree.children.splice(tree.children.indexOf(p), 1, ...split)
   })
 }
 
 const explode = (textNode) => {
-  return sentences(textNode.value, { preserve_whitespace: true })
-    .map(v => ({ ...textNode, value: v }))
+  let { value } = textNode
+  const startsWithStop = value.startsWith('.')
+
+  if (startsWithStop) {
+    value = value.slice(1)
+  }
+
+  const all = sentences(value, { preserve_whitespace: true })
+
+  if (startsWithStop) {
+    all.unshift('.')
+  }
+
+  return all.map(v => ({ ...textNode, value: v }))
 }
 
 const pushTo = array => (p, from, index) => {

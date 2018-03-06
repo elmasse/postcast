@@ -28,9 +28,13 @@ export default ({ data }) => (tree) => {
       case 'h3':
       case 'h4':
       case 'blockquote':
-        caption = createCaption({props: { hidden: true }, children: [node]})
+      case 'ul':
+      case 'ol':
+        // caption = createCaption({props: { hidden: true }, children: [node]})
         content = h('postcast-content', [node])
-        items.push(h('postcast-frame', [content, caption]))
+        // items.push(h('postcast-frame', [content, caption]))
+        // items.push(h('postcast-frame', [content]))
+        items.push(content)
         break
       case 'p':
         if (onlyImages(node)) {
@@ -48,15 +52,15 @@ export default ({ data }) => (tree) => {
         ])
         items.push(content)
         break
-      case 'ul':
-      case 'ol':
-        const uls = node.children.filter((c) => !['\n'].includes(c.value))
-        for (const child of uls) {
-          caption = createCaption({props: { hidden: true }, children: [child]})
-          content = h('postcast-content', [h('ul', [child])])
-          items.push(h('postcast-frame', [content, caption]))
-        }
-        break
+      // case 'ul':
+      // case 'ol':
+      //   const uls = node.children.filter((c) => !['\n'].includes(c.value))
+      //   for (const child of uls) {
+      //     caption = createCaption({props: { hidden: true }, children: [child]})
+      //     content = h('postcast-content', [h('ul', [child])])
+      //     items.push(h('postcast-frame', [content, caption]))
+      //   }
+      //   break
       default:
         console.warn(`${tagName} is not processed`)
         break
