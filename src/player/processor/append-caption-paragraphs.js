@@ -10,7 +10,7 @@ export default () => tree => {
       case 'blockquote':
         e.children.forEach(bi => {
           switch (bi.type) {
-            case 'list': 
+            case 'list':
               bi.children.forEach(li => {
                 li.children.forEach(lip => {
                   extended.push({ ...lip, type: 'paragraph' })

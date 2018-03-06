@@ -16,7 +16,7 @@ import Code from '../frame/code'
 import createItems from './create-items'
 import createFrames from './create-frames'
 import splitParagraph from './split-paragraph'
-import appendCaptionParagraphs from './append-caption-paragraphs';
+import appendCaptionParagraphs from './append-caption-paragraphs'
 
 export default (markdown, { phonemes }) => {
   const { data, content } = fm(markdown)
