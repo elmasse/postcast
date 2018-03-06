@@ -20,7 +20,6 @@ export default () => tree => {
           exploded.push([_child, explode(_child)])
         }
       }
-      console.log(exploded)
 
       exploded.forEach(([child, explode]) => {
         children.splice(children.indexOf(child), 1, ...explode)
