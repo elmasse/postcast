@@ -34,14 +34,14 @@ export default () => tree => {
           from = index + 1 // skip break
         }
 
-        if (child.type === 'text') {
-          sentence += child.value
+        if (child.type === 'text' || child.type === 'strong' || child.type === 'emphasis') {
+          sentence += valueFrom(child)
           const result = sentences(sentence)
 
           if (result.length > 1) {
             pushToSplit(p, from, index)
             from = index
-            sentence = child.value
+            sentence = valueFrom(child)
           }
         }
 
@@ -55,8 +55,6 @@ export default () => tree => {
   replace.forEach(([p, split]) => {
     tree.children.splice(tree.children.indexOf(p), 1, ...split)
   })
-
-  console.log(tree)
 }
 
 const explode = (textNode) => {
@@ -82,4 +80,8 @@ const pushTo = array => (p, from, index) => {
   if (split.length) {
     array.push({ ...p, children: split })
   }
+}
+
+const valueFrom = child => {
+  return child.value || child.children.map(c => c.value).join('')
 }
