@@ -1,5 +1,7 @@
 # Postcast
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/postcast/postcast.svg)](https://greenkeeper.io/)
+
 A react component to create a postcast using markdown files.
 
 ## Install
