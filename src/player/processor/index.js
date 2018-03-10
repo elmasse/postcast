@@ -18,7 +18,7 @@ import createFrames from './create-frames'
 import splitParagraph from './split-paragraph'
 import appendCaptionParagraphs from './append-caption-paragraphs'
 
-export default (markdown, { phonemes }) => {
+export default (markdown, { phonemes } = {}) => {
   const { data, content } = fm(markdown)
   const processor = unified()
     .use(remarkParse)
