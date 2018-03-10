@@ -6,52 +6,53 @@ export default () => tree => {
   tree.children
     .filter(p => p.type === 'paragraph')
     .forEach(
-    p => {
-      const { children } = p
-      const split = []
-      let sentence = ''
-      let from = 0
-      const pushToSplit = pushTo(split)
-      const exploded = []
+      p => {
+        const { children } = p
+        const split = []
+        let sentence = ''
+        let from = 0
+        const pushToSplit = pushTo(split)
+        const exploded = []
 
-      // explode text children
-      for (const _child of children) {
-        if (_child.type === 'text') {
-          exploded.push([_child, explode(_child)])
-        }
-      }
-
-      exploded.forEach(([child, explode]) => {
-        children.splice(children.indexOf(child), 1, ...explode)
-      })
-
-      // split sentences
-      for (const child of children) {
-        const index = children.indexOf(child)
-
-        if (child.type === 'break') {
-          pushToSplit(p, from, index)
-          from = index + 1 // skip break
-        }
-
-        if (child.type === 'text' || child.type === 'strong' || child.type === 'emphasis') {
-          sentence += valueFrom(child)
-          const result = sentences(sentence)
-
-          if (result.length > 1) {
-            pushToSplit(p, from, index)
-            from = index
-            sentence = valueFrom(child)
+        // explode text children
+        for (const _child of children) {
+          if (_child.type === 'text') {
+            exploded.push([_child, explode(_child)])
           }
         }
 
-        if (index === children.length - 1) { // reached last element
-          pushToSplit(p, from)
-        }
-      } // for
-      replace.push([p, split])
-    }
-  ) // forEach
+        exploded.forEach(([child, explode]) => {
+          children.splice(children.indexOf(child), 1, ...explode)
+        })
+
+        // split sentences
+        for (const child of children) {
+          const index = children.indexOf(child)
+
+          if (child.type === 'break') {
+            pushToSplit(p, from, index)
+            from = index + 1 // skip break
+          }
+
+          if (child.type === 'text' || child.type === 'strong' || child.type === 'emphasis') {
+            sentence += valueFrom(child)
+            const result = sentences(sentence)
+
+            if (result.length > 1) {
+              pushToSplit(p, from, index)
+              from = index
+              sentence = valueFrom(child)
+            }
+          }
+
+          if (index === children.length - 1) { // reached last element
+            pushToSplit(p, from)
+          }
+        } // for
+        replace.push([p, split])
+      }
+    ) // forEach
+
   replace.forEach(([p, split]) => {
     tree.children.splice(tree.children.indexOf(p), 1, ...split)
   })

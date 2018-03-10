@@ -28,7 +28,7 @@ export default class Frame extends Component {
       <Framed {...props}>
         {
           children
-          .filter(c => captions || (!isCaptionNode(c)))
+            .filter(c => captions || (!isCaptionNode(c)))
         }
       </Framed>
     )

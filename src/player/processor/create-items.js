@@ -85,9 +85,11 @@ const captioner = ({ data }) => ({ props, children }) => {
     textToSpeech += value
   })
 
-  return h('postcast-caption', {
-    ...props,
-    textToSpeech: replacePhonemes(phonemes, textToSpeech) },
+  return h('postcast-caption',
+    {
+      ...props,
+      textToSpeech: replacePhonemes(phonemes, textToSpeech)
+    },
     [node]
   )
 }
