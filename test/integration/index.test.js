@@ -4,6 +4,7 @@ import fetchMock from 'fetch-mock'
 
 import { mount } from 'enzyme'
 
+/* SUT */
 import Postcast from '../../src'
 
 describe('Postcast', () => {
