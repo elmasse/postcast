@@ -2,6 +2,8 @@
 
 A react component to create a postcast using markdown files.
 
+[![Build Status](https://travis-ci.org/postcast/postcast.svg?branch=master)](https://travis-ci.org/postcast/postcast)
+
 ## Install
 
 `Postcast` requires `react` and `react-dom` as peer dependencies.
