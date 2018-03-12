@@ -25,7 +25,7 @@ describe('player/processor YAML', () => {
 
 describe('player/processor content', () => {
   test('process content with title and short paragraph', async () => {
-    const title = 'TItle'
+    const title = 'Title'
     const content = 'Some text.'
     const markdown = create({ yaml: { title }, content })
     
@@ -38,8 +38,15 @@ describe('player/processor content', () => {
     expect(result).toHaveProperty('content')
 
     expect(result.content.length).toBe(2) // [frame, frame]
-    expect(result.content[0].props.children.length).toBe(2) // frame -> [content(title), caption(title)]
-    expect(result.content[1].props.children.length).toBe(2) // frame -> [content(title), caption(paragraph)]
-    expect(result.content[1].props.children[1].props.children.length).toBe(1) // caption -> p
+    const [ frame1, frame2 ] = result.content
+    
+    expect(frame1.props.children.length).toBe(2) // frame -> [content(title), caption(title)]
+    expect(frame2.props.children.length).toBe(2) // frame -> [content(title), caption(paragraph)]
+
+    expect(frame2.props.children[1].props.children.length).toBe(1) // caption -> p
+    const [frame2caption] = frame2.props.children[1].props.children    
+    
+    expect(frame2caption.props.children[0]).toBe(content)
+    
   })
 });
