@@ -13,5 +13,5 @@ export const create = ({ yaml = {}, content = '' }) => {
     return `---\n${body}\n---\n`
   }
 
-  return `${header(yaml)} ${content}}`
+  return `${header(yaml)}${content}`
 }
