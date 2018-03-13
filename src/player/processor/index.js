@@ -2,6 +2,7 @@ import React from 'react'
 
 import unified from 'unified'
 import remarkParse from 'remark-parse'
+import breaks from 'remark-breaks'
 import remark2rehype from 'remark-rehype'
 import emoji from 'remark-emoji'
 import reactRenderer from 'rehype-react'
@@ -22,6 +23,7 @@ export default (markdown, { phonemes } = {}) => {
   const { data, content } = fm(markdown)
   const processor = unified()
     .use(remarkParse)
+    .use(breaks)
     .use(appendCaptionParagraphs)
     .use(splitParagraph)
     .use(emoji)
