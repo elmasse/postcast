@@ -1,17 +1,18 @@
 
 export const create = ({ yaml = {}, content = '' }) => {
-  const header = (yaml) => {
-    const keys = Object.keys(yaml)
-    let body = ''
+  
+  return `${header(yaml)}${content}`
+}
 
-    if (!yaml || ! keys.length) return ''
-    
-    for (let key of keys) {
-      body += `${key}: ${yaml[key]}\n`
-    }
+const header = (yaml) => {
+  const keys = Object.keys(yaml)
+  let body = ''
 
-    return `---\n${body}\n---\n`
+  if (!yaml || ! keys.length) return ''
+  
+  for (let key of keys) {
+    body += `${key}: ${yaml[key]}\n`
   }
 
-  return `${header(yaml)}${content}`
+  return `---\n${body}\n---\n`
 }
