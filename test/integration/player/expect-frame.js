@@ -1,25 +1,24 @@
 /* global expect */
 
 
-expect.extend({
-  toHaveFrames,
-  toHaveFrameWithCaption
-})
+const toHaveContentWithText = (actual, contentText) => {
+  const content = actual.props.children[0]
+  const element = content.props.children[0]
+  const value = element.props.children[0]
+  const pass = actual && content && element && value === contentText
 
-function toHaveFrames (received, argument) {
-  const pass = received.content.length === argument
   return ({
-    message: () => `expected result to${pass ? ' not' : '' } have ${argument} frames but got ${received.content.length}`,
+    message: () => `expected "${value}" in content to${pass ? ' not' : '' } be "${contentText}"`,
     pass
   })
+  
 }
 
-function toHaveFrameWithCaption (actual, { index = 0,  captionText }) {
-  const frame = actual.content[index]
-  const caption = frame.props.children[1]
+const toHaveCaptionWithText = (actual, captionText) => {
+  const caption = actual.props.children[1]
   const p = caption.props.children[0]
   const value = p.props.children[0]
-  const pass = frame && caption && p && value === captionText
+  const pass = actual && caption && p && value === captionText
 
   return ({
     message: () => `expected "${value}" in frame ${index} caption to${pass ? ' not' : '' } be "${captionText}"`,
@@ -27,14 +26,8 @@ function toHaveFrameWithCaption (actual, { index = 0,  captionText }) {
   })
 }
 
-// export default (result) => {
-//   return {
-//     toHaveDataAndContent: hasDataAndContent(result),
-//     containsFrames: containsFrames(result)
-//   }
-// }
 
-
-// const containsFrames = (result) => (qty) => {
-//   expect(result.content.length).toBe(qty)
-// }
+expect.extend({
+  toHaveCaptionWithText,
+  toHaveContentWithText
+})
