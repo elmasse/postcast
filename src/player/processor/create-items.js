@@ -10,9 +10,10 @@ export default ({ data }) => (tree) => {
 
   if (data && data.title) {
     const node = h('h1', [data.title])
-    caption = createCaption({props: { hidden: true }, children: [node]})
+    // caption = createCaption({props: { hidden: true }, children: [node]})
+    caption = createCaption({children: [h('p', [data.title])]})
     content = h('postcast-content', [node])
-    items.push(h('postcast-frame', [content, caption]))
+    items.push(content, caption)
   }
 
   for (const node of children) {
