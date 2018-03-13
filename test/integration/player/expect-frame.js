@@ -9,7 +9,7 @@ expect.extend({
 function toHaveFrames (received, argument) {
   const pass = received.content.length === argument
   return ({
-    message: () => `expected ${received.content} to ${pass ? 'not' : '' } have ${argument} frames`,
+    message: () => `expected result to${pass ? ' not' : '' } have ${argument} frames but got ${received.content.length}`,
     pass
   })
 }
@@ -18,14 +18,13 @@ function toHaveFrameWithCaption (actual, { index = 0,  captionText }) {
   const frame = actual.content[index]
   const caption = frame.props.children[1]
   const p = caption.props.children[0]
+  const value = p.props.children[0]
+  const pass = frame && caption && p && value === captionText
 
-  const pass = frame && caption && p.props.children[0] === captionText
-  
   return ({
-    message: () => `expected ${captionText} in frame ${index} to ${pass ? 'not' : '' } have ${captionText}`,
+    message: () => `expected "${value}" in frame ${index} caption to${pass ? ' not' : '' } be "${captionText}"`,
     pass
-  })  
-
+  })
 }
 
 // export default (result) => {
