@@ -1,52 +1,57 @@
 /* global describe, test, expect */
 
+import './expect-frame'
+
 import { create } from '../../markdown-helper'
 
 /* SUT */
 import processor from '../../../src/player/processor'
 
-describe('player/processor YAML', () => {
-  test('process headers: title', async () => {
-    const title = 'TItle'
-    const content = 'Some text.'
-    const markdown = create({ yaml: { title }, content })
+describe('player/processor content', () => {
+  test('process content with title and one paragraph', async () => {
+    const paragraph = 'Some text.'
+    const title = 'title'
+    const markdown = create({ content: `# ${title}\n${paragraph}` })
     
     //when
     const result = processor(markdown)
 
-    //expect
-    expect(result).toBeTruthy()
-    expect(result).toHaveProperty('data')
-    expect(result).toHaveProperty('content')
-    expect(result.data).toMatchObject({ title })
+    //expect    
+    const { content } = result
+    expect(result).toHaveFrames(3)
+    expect(result).toHaveFrameWithCaption({ index: 1, captionText: title })
+    expect(result).toHaveFrameWithCaption({ index: 2, captionText: paragraph })
   })
+  test('process content with title and paragraph with 2 sentences', async () => {
+    const sentences = ['Some text. ', 'Another sentence.']
+    const paragraph = sentences.join('')
+    const title = 'title'
+    const markdown = create({ content: `# ${title}\n${paragraph}` })    
+
+    //when
+    const result = processor(markdown)
+
+    //expect
+    const { content } = result
+    expect(result).toHaveFrames(4)
+    expect(result).toHaveFrameWithCaption({ index: 1, captionText: title })
+    expect(result).toHaveFrameWithCaption({ index: 2, captionText: sentences[0] })
+    expect(result).toHaveFrameWithCaption({ index: 3, captionText: sentences[1] })
+  })  
 });
 
-
-describe('player/processor content', () => {
-  test('process content with title and short paragraph', async () => {
+describe('player/processor with YAML frontmatter', () => {
+  test('process headers: title', async () => {
     const title = 'Title'
     const content = 'Some text.'
     const markdown = create({ yaml: { title }, content })
-    
+
     //when
     const result = processor(markdown)
 
     //expect
-    expect(result).toBeTruthy()
-    expect(result).toHaveProperty('data')
-    expect(result).toHaveProperty('content')
-
-    expect(result.content.length).toBe(2) // [frame, frame]
-    const [ frame1, frame2 ] = result.content
-    
-    expect(frame1.props.children.length).toBe(2) // frame -> [content(title), caption(title)]
-    expect(frame2.props.children.length).toBe(2) // frame -> [content(title), caption(paragraph)]
-
-    expect(frame2.props.children[1].props.children.length).toBe(1) // caption -> p
-    const [frame2caption] = frame2.props.children[1].props.children    
-    
-    expect(frame2caption.props.children[0]).toBe(content)
-    
+    expect(result).toHaveFrames(3)
+    expect(result).toHaveFrameWithCaption({ index: 1, captionText: title })
+    expect(result).toHaveFrameWithCaption({ index: 2, captionText: content })
   })
 });
