@@ -6,7 +6,6 @@ expect.extend({
   toHaveContentWithText
 })
 
-
 function toHaveContentWithText (actual, contentText) {
   const content = actual.props.children[0]
   const element = content.props.children[0]
@@ -14,10 +13,9 @@ function toHaveContentWithText (actual, contentText) {
   const pass = actual && content && element && value === contentText
 
   return ({
-    message: () => `expected "${value}" in content to${pass ? ' not' : '' } be "${contentText}"`,
+    message: () => `expected "${value}" in content to${pass ? ' not' : ''} be "${contentText}"`,
     pass
   })
-  
 }
 
 function toHaveCaptionWithText (actual, captionText) {
@@ -27,7 +25,7 @@ function toHaveCaptionWithText (actual, captionText) {
   const pass = actual && caption && p && value === captionText
 
   return ({
-    message: () => `expected "${value}" in frame caption to${pass ? ' not' : '' } be "${captionText}"`,
+    message: () => `expected "${value}" in frame caption to${pass ? ' not' : ''} be "${captionText}"`,
     pass
   })
 }
@@ -47,11 +45,9 @@ function toHaveCaptionWith (actual, expectedArray) {
     if (typeof expected === 'object') {
       expect(descendants[index]).toMatchObject(expected)
     }
-  });
+  })
   return ({
     message: () => msg,
     pass
   })
-
-
 }

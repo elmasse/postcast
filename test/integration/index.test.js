@@ -66,8 +66,7 @@ describe('Postcast', () => {
   })
 
   test('markdown as children', async () => {
-
-    const wrapper = mount(<Postcast >{()=>`# Title\nAnd Paragraph`}</Postcast>)
+    const wrapper = mount(<Postcast >{() => `# Title\nAnd Paragraph`}</Postcast>)
 
     await wrapper.instance().componentDidMount()
 
