@@ -76,12 +76,12 @@ export async function build(task) {
 }
 
 export async function lint(task) {
-  await task.source('src/**/*.js').standard()
+  await task.source(['src/**/*.js', 'test/**/*.js']).standard()
 }
 
 export default async function (task) {
   await task.start('build')
-  await task.watch('src/**/*.js', ['lint','compile'])
+  await task.watch(['src/**/*.js', 'test/**/*.js'], ['lint','compile'])
 }
 
 export async function release (task) {
