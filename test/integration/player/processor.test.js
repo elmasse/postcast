@@ -83,8 +83,27 @@ describe('player/processor content', () => {
     expect(frames.length).toBe(3)
     expect(frames[0]).toHaveContentWithText(title)
     expect(frames[1]).toHaveCaptionWithText(title)
-    expect(frames[2]).toHaveCaptionWith(['Some text with ', { type: 'a' }, '.'])
+    expect(frames[2]).toHaveCaptionWith(['Some text with ', { type: 'a', props: { children: ['a link'] } }, '.'])
   })
+  test('process content with title and paragraph with emphasized and bold text', () => {
+    const paragraph = `Some _text with_ **bold content**.`
+    const title = 'title'
+    const markdown = create({ content: `# ${title}\n${paragraph}` })    
+
+    //when
+    const { content: frames } = processor(markdown)
+
+    //expect
+    expect(frames.length).toBe(3)
+    expect(frames[0]).toHaveContentWithText(title)
+    expect(frames[1]).toHaveCaptionWithText(title)
+    expect(frames[2]).toHaveCaptionWith([
+      'Some ', 
+      { type: 'em', props: { children: ['text with'] } },
+      { type: 'strong', props: { children: ['bold content'] } },
+      '.'
+    ])
+  })  
 });
 
 describe('player/processor with YAML frontmatter', () => {
