@@ -37,21 +37,19 @@ function toHaveCaptionWith (actual, expectedArray) {
   const p = caption.props.children[0]
   const descendants = p.props.children
   let pass = true
-  let msg;
+  let msg
+
   expectedArray.forEach((expected, index) => {
     if (typeof expected === 'string' && descendants[index] !== expected) {
+      msg = `expected ${expect} at ${index} but got ${descendants[index]}`
       pass = false
     }
     if (typeof expected === 'object') {
-      for (let [k,v] in Object.entries(expected)) {
-        if (descendants[index][k] !== v) {
-          pass = false
-        }
-      }
+      expect(descendants[index]).toMatchObject(expected)
     }
   });
   return ({
-    message: () => `caption is wrong:`,
+    message: () => msg,
     pass
   })
 
