@@ -77,7 +77,7 @@
     "rollup-plugin-babel": "3.0.3",
     "rollup-plugin-commonjs": "9.1.0",
     "rollup-plugin-node-resolve": "3.2.0",
-    "standard": "11.0.0",
+    "standard": "^11.0.1",
     "taskr": "1.1.0",
     "taskr-rollup": "0.0.4",
     "taskr-standard": "^1.0.2"
