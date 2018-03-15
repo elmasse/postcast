@@ -241,7 +241,7 @@ exports[`Postcast load src with error 1`] = `
     >
       <Styled(div)>
         <div
-          className="css-72j8j7"
+          className="css-pln80e"
         >
           <h2>
             Something went wrong
@@ -264,7 +264,7 @@ exports[`Postcast load src with non markdown endpoint 1`] = `
     >
       <Styled(div)>
         <div
-          className="css-72j8j7"
+          className="css-pln80e"
         >
           <h2>
             Something went wrong
