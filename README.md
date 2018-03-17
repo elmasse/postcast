@@ -21,6 +21,7 @@ You can specify a url pointing to a markdown file using the `src` config:
 
 ```js
 import React from 'react'
+import Postcast from 'postcast'
 
 export default () => <Postcast src="/guides/getting-started.md" />
 
@@ -31,9 +32,14 @@ export default () => <Postcast src="/guides/getting-started.md" />
 Markdown can be passed using a children function:
 
 ```js
-<Postcast lang="es-AR">
+import React from 'react'
+import Postcast from 'postcast'
+
+export default () => (
+  <Postcast lang="es-AR">
     {() => `#Hola Mundo!`}
-</Postcast>
+  </Postcast>
+)
 
 ```
 
@@ -45,6 +51,8 @@ Markdown can be passed using a children function:
 
 ```js
 import React from 'react'
+import Postcast from 'postcast'
+
 // eslint-disable-next-line 
 import css from 'highlight.js/styles/atom-one-light.css'
 
