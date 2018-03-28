@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
+import { dependencies, peerDependencies } from './package'
 
 const baseRollupPlugins = [
   babel({
@@ -20,24 +21,7 @@ const baseRollupPlugins = [
   })
 ]
 
-const externals = [
-  'react',
-  'react-dom',
-  'emotion',
-  'frontmatter',
-  'hastscript',
-  'highlight.js',
-  'react-emotion',
-  'rehype-raw',
-  'rehype-react',
-  'remark-emoji',
-  'remark-parse',
-  'remark-rehype',
-  'sbd',
-  'unified',
-  'unist-builder',
-  'unist-visit',
-]
+const externals = Object.keys({ ...dependencies, ...peerDependencies })
 
 export async function cjs(task, opts) {
   await task
